@@ -25,10 +25,10 @@ In most time, the simulated annealing algorithm gets a larger value but about 0.
 
 b. Does the starting value make any difference here?
 The results from both algorithms are different according to their initial value. 
-Everytime, the hill climbing algorithm gets the nearest hill; however, the simulated annealing algorithm reaches a higher value.
+Every time, the hill climbing algorithm gets the nearest hill; however, the simulated annealing algorithm reaches a higher value.
 
 c. Does modifying the step size (i.e., delta) affect the operation of the two algorithms? Why or why not?
-Modifying the step size affect the operation of the two algorithms. It is because the step size determines the next point which directely relates to the result. It may cause to skip the expected value.  
+Modifying the step size affect the operation of the two algorithms. It is because the step size determines the next point which directly relates to the result. It may cause to skip the expected value.  
 
 d. What are the maximum and minimum possible values here, and how do the two algorithms score with respect to them?
 The minimum value of the hill climbing algorithm that I have observed is 1.82, and the maximum is 29.64.
@@ -41,7 +41,7 @@ Exercise 2.3
 Add code to your abs-sine implementation that implements random restarts.
 
 a. How does each algorithm do with these restarts? Why?
-Both algorithms get a relatively better outcome. These restarts advance results of the hill climbing algorithm since it selects better one. However, it does not gerenty to get the maximum value since it selects the restart point randomly, but still, it has a better possibility to reach the point.
+Both algorithms get a relatively better outcome. These restarts advance results of the hill climbing algorithm since it selects better one. However, it does not guarantee to get the maximum value since it selects the restart point randomly, but still, it has a better possibility to reach the point.
 The simulated annealing algorithm has more chance to back go global maximum when it is stuck in the local maximum so that these restarts address the global maximum.
 
 b. What are the average values of the runs for each of the algorithms?
@@ -56,10 +56,10 @@ Exercise 2.4
 Consider the use of local beam search in which the successor states are chosen using one of the two algorithms as applied to the abs-sin function.
 
 a. For which algorithm does beam search make the most sense?
-I think the simulated annealing algorithm is more reasonable to use it since it can select good values which it schedults to explore and exploit the value.
+I think the simulated annealing algorithm is more reasonable to use it since it can select good values which it schedules to explore and exploit the value.
 
 b. How many solutions could you maintain with reasonable space and time constraints?
 I don’t think it needs to select many nodes since the goal is to reach the global maximum. If it considers time constraints, it still needs to select some qualitative nodes to minimize the space in order to make it faster. 
 
 c. How would you modify the code to implement beam search? How is it different from random restarts, if at all?
-The random restarts search to get the only one best value; however, the beam search is not looking for the best but multiple good values. It also choses a particular amount of set of random numbers, so the strategy is different although it takes random numbers. 
+The random restarts search to get the only one best value; however, the beam search is not looking for the best but multiple good values. It also chooses a particular amount of set of random numbers, so the strategy is different although it takes random numbers. 
