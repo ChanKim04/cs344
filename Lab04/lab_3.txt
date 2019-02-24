@@ -1,0 +1,38 @@
+@author by Chan Kim (ck45) for CS 344 Lab04 at Calvin College
+@Date: 02/22/2019
+
+Exercise 4.3
+
+a. Drug testing
+
+P(U) = 0.089		P(-U) = 0.911
+P(test | U) = 0.99	P(-test | U) = 0.01
+P(test | -U) = 0.02	P(-test | -U) = 0.98
+(P(test | U) * P(U)) / P(test) = 
+(P(test | U) * P(U)) / (P(test | U) * P(U) + P(test | -U) * P(-U) = 
+(0.99 * 0.089) / (0.99 * 0.089 +  0.02 * 0.911) = 0.8286 = 82.86%
+
+    1. P(User) = 0.089
+    2. P(test | user) = 0.99
+    3. P(-test | user) = 0.01
+    4. P(test | -user) = 0.02
+    5. P(User | test) = 0.8286
+
+b. Breast cancer
+
+P(cancer) = 0.01                    P(-cancer) = 0.99
+P(mammographies | cancer) = 0.8     P(-mammographies | cancer) = 0.2
+P(mammographies | - cancer) = 0.096 P(-mammographies | -cancer) = 0.904
+
+    1. A woman in this age group is found to have a positive mammography in a routine screening. What are the chances that she has/doesn't have cancer?
+
+        P(cancer | mammographies) = 
+        (P(mammographies | cancer) * P(cancer)) / P(mammographies) = 
+        (P(mammographies | cancer) * P(cancer)) / (P(mammographies | cancer) * P(cancer) + P(mammographies | -cancer) * P(-cancer)) =
+        (0.8 *0.01) / (0.8 * 0.01 +0.096 * 0.99) = 0.07764 = 7.764%
+
+        P(-cancer | mammographies) = 
+        (P(mammographies | -cancer) * P(-cancer)) / P(mammographies) = 
+        (P(mammographies | -cancer) * P(-cancer)) / (P(mammographies | -cancer) * P(-cancer) + P(mammographies | cancer) * P(cancer)) =
+        (0.096 * 0.99) / ((0.096 * 0.99 + 0.8 * 0.01)  = 0.9224 = 92.24%
+
