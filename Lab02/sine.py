@@ -11,7 +11,7 @@ The function is a linear function  with a single, discontinuous max value
 from functools import reduce
 
 from tools.aima.search import Problem, hill_climbing, simulated_annealing, \
-    exp_schedule, genetic_search, simulated_annealing_full
+    exp_schedule, genetic_search
 from random import randrange
 import math
 import time
