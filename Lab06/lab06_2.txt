@@ -1,0 +1,3 @@
+Compute the information gain provided by the “Hungry?“ question from the restaurant domain. Use this restaurant data. Would this question be better than either of the questions discussed in class (i.e., “Patrons?”, “Type?”?
+
+TODO
