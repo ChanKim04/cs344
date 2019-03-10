@@ -1,3 +1,32 @@
 Compute the information gain provided by the “Hungry?“ question from the restaurant domain. Use this restaurant data. Would this question be better than either of the questions discussed in class (i.e., “Patrons?”, “Type?”?
 
-TODO
+example,    Hun,    WillWait
+x1,         Yes,    Yes
+x2,         Yes,    No
+x3,         No,     Yes
+x4,         Yes,    Yes
+x5,         No,     No
+x6,         Yes,    Yes
+x7,         No,     No
+x8,         Yes,    Yes
+x9,         No,     No
+x10,        Yes,    No
+x11,        No,     No
+x12,        Yes,    Yes
+
+Hungry = 7/12
+Hungry, WillWait = 5/7
+Hungry, -WillWait = 2/7
+- Hungry = 5/12
+- Hungry, WillWait = 1/5
+- Hungry, -WillWait = 4/5
+
+Remainder(Hungry?) = 7/12 Entropy(Hungry) + 5/12 Entropy(-Hungry)
+= 7/12(-5/7 log_2(5/7) + -2/7 log_2(2/7)) + 5/12(-1/5 log_2(1/5) + -4/5 log_2(4/5))
+= 0.80429
+Entropy(v) = 1
+Gain(Hungry) = Entropy(v) - Remainder(Hungry?)
+Gain(Hungry) = 1 - 0.80429 = 0.19571
+
+Since Gain(Patrons) = 0.541 bits, Gain(TYpe) = 0 bits and Gain(Hungry) = 0.19571 bits,
+it confirming our intuition that Patrons is a better attribute. 
