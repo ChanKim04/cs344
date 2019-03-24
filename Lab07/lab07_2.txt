@@ -1,0 +1,12 @@
+Exercise 7.2
+a. Compare and contrast categorical vs numerical data
+Categorical data means data composed of textual. Numerical data is number data consisting of integer or float; however, in some cases, numerical data such as zip code may be treated as categorical data since it is not data for numerical computation. 
+b. Submit solutions to tasks 1–2. Include your best hyper-parameter values and the resulting RMSE, but not the training output.
+task 1
+train_model( learning_rate=0.00002,  steps=400, batch_size=4)
+Final RMSE (on training data): 171.23
+task 2
+train_model( learning_rate=0.00002, steps=800, batch_size=6, input_feature="population")
+	Final RMSE (on training data): 177.97
+c. What are the hyper-parameters learned in these exercises and is there a “standard” tuning algorithm for them?
+Hyper-parameters are tuning options for users in ML, and in this exercise, learning_rate, batch_size, input_feature and hyper-parameters are hyper-parameters. This is not a value to be tuned or optimized since it is a variable that is set and controlled by users, so there is no standard tuning algorithm. 
