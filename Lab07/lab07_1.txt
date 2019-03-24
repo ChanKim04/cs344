@@ -6,6 +6,9 @@ cities
 Exercie 2
 cities.reindex([6, 0, 5, 1, 4, 2, 3])
 b. Why would one use Pandas rather than the standard data manipulation features provided by NumPy?
-	Pandas is a column-oriented data analysis API. It can analyze and visualize data through a relational data table called DataFrame. However, numpy is used to manipulate vector data and matrices to process data with multidimensional structures. 
+	Pandas is a column-oriented data analysis API. It can analyze and visualize data through a relational data table called DataFrame. 
+    However, numpy is used to manipulate vector data and matrices to process data with multidimensional structures. 
 c. Under what circumstances would it be useful to reorder/shuffle a Pandas DataFrame?
-If we do not reorder/shuffle when using merged data, there may be differences between the initial and final results due to the difference in each data set. For this reason, reorder/shuffle is necessary for the consistency of the results. In addition, when choosing data from head and tail via reordering/shuffling, it can give a stable result of arbitrary data. 
+If we do not reorder/shuffle when using merged data, there may be differences between the initial and final results due to the difference in each data set. 
+For this reason, reorder/shuffle is necessary for the consistency of the results. In addition, when choosing data from head and tail via reordering/shuffling, 
+it can give a stable result of arbitrary data. 
