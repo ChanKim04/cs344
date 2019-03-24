@@ -4,12 +4,15 @@ task 1
 The min value of Housing_median_age in training and validation are 1.0. In common sense, it does not make sense to have a median age of 1.0. 
 Also, the max values for total_rooms, total_beadrooms, population, households and rooms_per_person are generally too large for each mean value. 
 Moreover, the difference between max and 75% of those values are 6 to 24 times. This big difference can make errors in the data.
+
 task 2
 Training data includes data for all California areas, but validation data only includes data for northern California from around San Jose. 
 Therefore, since the two data are not equally distributed, the training data and validation data are incorrect, and the data are needed to reorder/shuffle.
+
 task 3
 The data was not properly mixed because the part to reorder/shuffle the data was commented on. 
 Once I commented out that part and ran it again, it showed a data map with a normal California map.
+
 task 4
   # 1. Create input functions.
   training_input_fn = lambda: my_input_fn(training_examples, training_targets["median_house_value"], batch_size=batch_size)# YOUR CODE HERE
@@ -63,6 +66,7 @@ root_mean_squared_error = math.sqrt(
 print("Final RMSE (on test data): %0.2f" % root_mean_squared_error)
 
 Final RMSE (on test data): 162.96
+
 b. Give a one-paragraph summary of what you learned about using training, validation and testing datasets.
 Splitting a data set into training, validation, and testing has an advantage in the workflow. 
 This can greatly reduce the possibility of overfitting by evaluating a training set with a validation set and re-evaluating the result with a testing set. 

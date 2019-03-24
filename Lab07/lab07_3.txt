@@ -1,19 +1,23 @@
 Exercise 7.3
 a. Submit solutions to tasks 1–3.
-	task 1
-		california_housing_dataframe["rooms_per_person"] = california_housing_dataframe["total_rooms"] / california_housing_dataframe["population"]
+task 1
+california_housing_dataframe["rooms_per_person"] = california_housing_dataframe["total_rooms"] / california_housing_dataframe["population"]
 
 calibration_data = train_model( learning_rate=0.00005, steps=500, batch_size=5, input_feature="rooms_per_person")
-	task 2
+
+task 2
 plt.subplot(1, 2, 1)
 plt.scatter(calibration_data["predictions"], calibration_data["targets"])
 
 plt.subplot(1, 2, 2)
 california_housing_dataframe["rooms_per_person"].hist()
-	task 3
-		clipped_feature = california_housing_dataframe["rooms_per_person"].apply(lambda x: min(x, 4))
+
+task 3
+clipped_feature = california_housing_dataframe["rooms_per_person"].apply(lambda x: min(x, 4))
 clipped_feature.hist()
+
 b. What is the purpose of introducing synthetic features?
 Study the relationship of two other features and predict the relationship value through the results. 
+
 c. What are outliers and what is typically done with them?
 Outliers represent points that are outside the distribution range of common data, which makes the data biased due to skewed points.
