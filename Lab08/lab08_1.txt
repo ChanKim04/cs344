@@ -1,0 +1,62 @@
+Exercise 8.1
+a. What does the Pearson correlation coefficient measure? Identify one example value from the correlation table you compute and explain why it makes sense.
+The Pearson correlation coefficient is a measure of linear correlation between two variables. 
+The correlation between population and total_rooms is 0.9, which is almost perfectly positive. 
+This is reasonable, because the more people there, the more rooms they use. A similar correlation is found in correlation with total-bedrooms.
+
+b. Submit your solutions to tasks 1–2. Include the features you selected for task 1 and the synthetic features you developed for task 2; include the final RMS errors but not the training output. Did you beat the Google-provided baselines?
+Task 1
+minimal_features = [
+  "housing_median_age",
+  "latitude",
+]
+
+assert minimal_features, "You must select at least one feature!"
+
+minimal_training_examples = training_examples[minimal_features]
+minimal_validation_examples = validation_examples[minimal_features]
+
+#
+# Don't forget to adjust these parameters.
+#
+train_model(
+    learning_rate=0.005,
+    steps=500,
+    batch_size=5,
+    training_examples=minimal_training_examples,
+    training_targets=training_targets,
+    validation_examples=minimal_validation_examples,
+    validation_targets=validation_targets)
+
+RMSE: 118.54
+The result from the provided solution: RMSE: 118.07
+Two results are about the same. 
+
+Task 2
+LATITUDE_RANGES = zip(range(33, 35), range(36, 40))
+
+def select_and_transform_features(source_df):
+  selected_examples = pd.DataFrame()
+  selected_examples["median_income"] = source_df["median_income"]
+  for r in LATITUDE_RANGES:
+    selected_examples["latitude_%d_to_%d" % r] = source_df["latitude"].apply(
+      lambda l: 1.0 if l >= r[0] and l < r[1] else 0.0)
+  return selected_examples
+
+selected_training_examples = select_and_transform_features(training_examples)
+selected_validation_examples = select_and_transform_features(validation_examples)
+
+_ = train_model(
+    learning_rate=0.03,
+    steps=500,
+    batch_size=5,
+    training_examples=selected_training_examples,
+    training_targets=training_targets,
+    validation_examples=selected_validation_examples,
+    validation_targets=validation_targets)
+
+RMSE: 83.82
+	The result from the provided solution: RMSE: 140.24
+    The result of the provided solution was higher than my result. 
+    Once I changed the learning rate of the provided solution, 
+    the result became 84.14 which was about the same as my result. 

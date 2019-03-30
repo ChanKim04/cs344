@@ -1,0 +1,22 @@
+Exercise 8.3
+a. Compare and contrast Seaborn vs. MatPlotLib.
+Seaborn provides a pairplot that allows you to evaluate correlations of several variables simultaneously. 
+However, creating a scatterplot matrix using MatPlotLib is more complex. Seaborn is based on MatPlotLib, 
+but there is a feature that MatPlotLib doesn't provide, such as pairplot. MatPlotLib, on the other hand, 
+has the advantage of setting the detail of the plot.
+
+b. How big is this dataset and does it seem of an appropriate size for this problem?
+The size of the dataset is 397. It is a relatively small size dataset; however, since data of each variable distributed well, 
+it is acceptable to use this size of data when we check the pairplot.
+
+c. Explain what the prescribed normalization of the data does.
+The prescribed normalization is used to train the model and prevents to create a model that is dependent on the input unit.
+
+d. Is this an example of a linear regression model?
+This is a linear regression model because the shapes presented by the provided plots are close to a linear relation.
+
+e. In their conclusion, they claim that smaller datasets “prefer” smaller networks. Do you agree? Explain your answer.
+I agree. If the size of the data is large but the model is simple, the probability of underfitting is high. 
+However, if the data size is not sufficient, but the model is complex, there is a risk to be overfitting. 
+Since this dataset is small, there is a risk of overfitting, which makes it difficult to generalize to new data. 
+Therefore, if the dataset is small, the smaller network is also preferable.

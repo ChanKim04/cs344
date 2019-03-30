@@ -1,0 +1,33 @@
+Exercise 8.2
+a. They recommend FTRL for L1 optimization, but the code specifies the same rate (learning_rate) for all runs. How is FTRL managing the learning rate?
+    learning_rate is managed through one of the args, learning_rate_power. learning_rate_power controls the decrease in learning_rate during training.
+
+b. What good does the bucketing/binning do?
+    There may be no linear correlation between the two specific variables in the overall data. 
+    However, there may be a strong correlation between the two variables at certain points. 
+    So you can divide those specific points into buckets/bin. In this way, nonlinearities can be mapped in the model.
+
+c. Submit your solutions to tasks 1–2. Did you find their task 1 bucketing to make sense? Identify one unique feature cross for task 2 and explain how it could be useful.
+Task 1
+  bucketized_latitude = tf.feature_column.bucketized_column(
+    latitude, boundaries=get_quantile_based_boundaries(
+      training_examples["latitude"], 10))
+  bucketized_housing_median_age = tf.feature_column.bucketized_column(
+    housing_median_age, boundaries=get_quantile_based_boundaries(
+      training_examples["housing_median_age"], 7))
+  bucketized_median_income = tf.feature_column.bucketized_column(
+    median_income, boundaries=get_quantile_based_boundaries(
+      training_examples["median_income"], 7))
+  bucketized_rooms_per_person = tf.feature_column.bucketized_column(
+    rooms_per_person, boundaries=get_quantile_based_boundaries(
+      training_examples["rooms_per_person"], 7))
+
+    Since the range of latitude is 9.5 and the range of longitude is 10, it is reasonable to make 10 buckets according to the coordinates. 
+    Based on the size of the overall data, 7 is reasonable arbitrary value as well since the model is neither too large nor too small.
+
+Task 2
+long_x_lat = tf.feature_column.crossed_column(set([bucketized_longitude, bucketized_latitude]), hash_bucket_size=1000)
+
+    It displays well the characteristics that appear in a specific area. 
+    It can be learned that the price of a house in a certain area can be higher than other areas, 
+    and the difference in population density or age distribution of a specific area can also be learned and predicted.
