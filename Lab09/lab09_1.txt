@@ -1,0 +1,45 @@
+Exercise 9.1
+1. How does the linear regression approach to the problem fare?
+It uses a sigmoid function to generate a value between 0 and 1 to interpret the probability within a range of 0 to 1. 
+It predicts continuous values as close to 0 or 1 as possible.
+
+2. Task 1: Compare and contrast L2 Loss vs LogLoss.
+The loss function of the linear regression is the square loss, and the loss function of the logistic regression is the log loss. 
+The L2 loss does not clearly distinguish between the two cases, for example, 0.9 and 0.9999, although there is a large difference, 
+the penalty is not effectively assigned to the misclassification. Log loss, however, gives a big penalty to this difference.
+
+3. Task 2: Explain how the logistic regression fares compared to the linear regression.
+The logistic regression, as mentioned above, is a form of applying the sigmoid function to the linear prediction. 
+It creates a probability for discontinuous label values. The generated probability is binary classified as smaller values and larger values based on 0.5.
+
+4. Task 3: Here, just report the best values you can achieve for AUC/accuracy and what hyperparameters you used to get them.
+linear_classifier = train_linear_classifier_model(
+    learning_rate=0.000005,
+    steps=10000,
+    batch_size=1000,
+    training_examples=training_examples,
+    training_targets=training_targets,
+    validation_examples=validation_examples,
+    validation_targets=validation_targets)
+
+evaluation_metrics = linear_classifier.evaluate(input_fn=predict_validation_input_fn)
+
+print("AUC on the validation set: %0.2f" % evaluation_metrics['auc'])
+print("Accuracy on the validation set: %0.2f" % evaluation_metrics['accuracy'])
+
+    Result:
+    Training model...
+    LogLoss (on training data):
+    period 00 : 0.49
+    period 01 : 0.48
+    period 02 : 0.47
+    period 03 : 0.47
+    period 04 : 0.46
+    period 05 : 0.46
+    period 06 : 0.46
+    period 07 : 0.46
+    period 08 : 0.46
+    period 09 : 0.46
+    Model training finished.
+    AUC on the validation set: 0.80
+    Accuracy on the validation set: 0.78

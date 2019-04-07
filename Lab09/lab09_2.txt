@@ -1,0 +1,15 @@
+Exercise 9.2
+1. Why are we regularizing with respect to sparsity?
+Creating a feature cross results in more dimensions, larger model size, more memory usage, and slower runtimes. 
+Also, even if there is a lot of learning data, combinations are very rare and overfitting is likely to occur. 
+Therefore, we reduce the complexity by using the regularization function which derives the weight to zero, 
+thereby reducing the size and memory usage of the model to prevent overfitting and increase the efficiency of the model.
+
+2. How does L1 regularization increase sparsity?
+L1 regularization penalizes the sum of all the weighted absolute values. The derivative of L1 subtracts a constant from the weight each time, 
+but L1 has a discontinuity at zero due to the absolute value. As a result, the result of subtraction that passes through 0 is cleared to 0.
+
+3. Task 1: Here, just report the best log loss value / model size you can get and what gamma value you used to get them.
+The provided solution explained that a regularization strength of 0.1 was sufficient, but the model size was 759 and LogLoss was less than 0.36. 
+Since the model size is not less than 600, it is doubtful why 0.1 is sufficient. When I set the regularization strength to 0.75, 
+the model size was 596 and the LogLoss was less than 0.36, which satisfied both conditions.
