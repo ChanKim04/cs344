@@ -1,0 +1,116 @@
+Exercise 10.2
+
+1. What does AdaGrad do to boost performance?
+“The key insight of Adagrad is that it modifies the learning rate adaptively 
+for each coefficient in a model, monotonically lowering the effective learning 
+rate. This works great for convex problems, but isn't always ideal for 
+the non-convex problem Neural Net training.”
+
+2. Tasks 1–3: Report your best hyperparameter settings and their resulting performance.
+
+Task 1
+def normalize_linear_scale(examples_dataframe):
+  """Returns a version of the input `DataFrame` that has all its features normalized linearly."""
+  #
+  # Your code here: normalize the inputs.
+  #
+  processed_features = pd.DataFrame()
+  processed_features["latitude"] = linear_scale(examples_dataframe["latitude"])
+  processed_features["longitude"] = linear_scale(examples_dataframe["longitude"])
+  processed_features["housing_median_age"] = linear_scale(examples_dataframe["housing_median_age"])
+  processed_features["total_rooms"] = linear_scale(examples_dataframe["total_rooms"])
+  processed_features["total_bedrooms"] = linear_scale(examples_dataframe["total_bedrooms"])
+  processed_features["population"] = linear_scale(examples_dataframe["population"])
+  processed_features["households"] = linear_scale(examples_dataframe["households"])
+  processed_features["median_income"] = linear_scale(examples_dataframe["median_income"])
+  processed_features["rooms_per_person"] = linear_scale(examples_dataframe["rooms_per_person"])
+  return processed_features
+
+normalized_dataframe = normalize_linear_scale(preprocess_features(california_housing_dataframe))
+normalized_training_examples = normalized_dataframe.head(12000)
+normalized_validation_examples = normalized_dataframe.tail(5000)
+
+_ = train_nn_regression_model(
+    my_optimizer=tf.train.GradientDescentOptimizer(learning_rate=0.0007),
+    steps=5000,
+    batch_size=70,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+
+Model training finished.
+Final RMSE (on training data):   92.54
+Final RMSE (on validation data): 91.45
+
+Task 2
+_, adagrad_training_losses, adagrad_validation_losses = train_nn_regression_model(
+    my_optimizer=tf.train.AdagradOptimizer(learning_rate=0.5),
+    steps=500,
+    batch_size=100,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+
+Model training finished.
+Final RMSE (on training data):   68.26
+Final RMSE (on validation data): 66.05
+
+_, adam_training_losses, adam_validation_losses = train_nn_regression_model(
+    my_optimizer=tf.train.AdamOptimizer(learning_rate=0.005),
+    steps=500,
+    batch_size=100,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+
+Model training finished.
+Final RMSE (on training data):   75.53
+Final RMSE (on validation data): 73.67
+
+Task 3
+def normalize(examples_dataframe):
+  """Returns a version of the input `DataFrame` that has all its features normalized."""
+  #
+  # YOUR CODE HERE: Normalize the inputs.
+  #
+  processed_features = pd.DataFrame()
+
+  processed_features["households"] = log_normalize(examples_dataframe["households"])
+  processed_features["median_income"] = log_normalize(examples_dataframe["median_income"])
+  processed_features["total_bedrooms"] = log_normalize(examples_dataframe["total_bedrooms"])
+  
+  processed_features["latitude"] = linear_scale(examples_dataframe["latitude"])
+  processed_features["longitude"] = linear_scale(examples_dataframe["longitude"])
+  processed_features["housing_median_age"] = linear_scale(examples_dataframe["housing_median_age"])
+
+  processed_features["population"] = linear_scale(clip(examples_dataframe["population"], 0, 5000))
+  processed_features["rooms_per_person"] = linear_scale(clip(examples_dataframe["rooms_per_person"], 0, 5))
+  processed_features["total_rooms"] = linear_scale(clip(examples_dataframe["total_rooms"], 0, 10000))
+
+  return processed_features
+
+normalized_dataframe = normalize(preprocess_features(california_housing_dataframe))
+normalized_training_examples = normalized_dataframe.head(12000)
+normalized_validation_examples = normalized_dataframe.tail(5000)
+
+_ = train_nn_regression_model(
+    my_optimizer=tf.train.AdagradOptimizer(learning_rate=0.15),
+    steps=1000,
+    batch_size=50,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+
+Model training finished.
+Final RMSE (on training data):   68.19
+Final RMSE (on validation data): 70.46
+
+For Task 3, I couldn’t find a better result than the result of the provided solution. 

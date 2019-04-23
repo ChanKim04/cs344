@@ -1,0 +1,27 @@
+Exercise 10.3
+1. Task 1: What does the confusion matrix show for this example?
+	This shows a class that is misclassified as another class. 
+    This model finds and classifies confusing numbers.
+
+2. Task 2: How does the TensorFlow network architecture differ from the Keras example given in class? Report any improvements you can make over the baseline testset accuracy for this task.
+Keras could simply build the structure by adding a layer through the model.add. 
+However, TensorFlow is not as simple as Keras, but it is more complex since it 
+can modify and form structures according to the user's purpose. Therefore, 
+TensorFlow requires more code than Keras even though the outputs of networks are similar.
+
+The result of the test-set is 0.95.
+
+predict_test_input_fn = create_predict_input_fn(test_examples, test_targets, batch_size=100)
+
+test_predictions = classifier.predict(input_fn=predict_test_input_fn)
+test_predictions = np.array([item['class_ids'][0] for item in test_predictions])
+
+accuracy = metrics.accuracy_score(test_targets, test_predictions)
+print("Accuracy on test data: %0.2f" % accuracy)
+
+Accuracy on test data: 0.95
+
+3. Task 3: What differences can you see between the visualizations for 10 steps and 1000 steps?
+The result of 10 steps is images that are difficult to recognize its patterns, whereas images 
+from 1000 steps are more recognizable to observe patterns of images than 10 steps. But still, 
+the result from 1000 steps is not clear to understand the images.

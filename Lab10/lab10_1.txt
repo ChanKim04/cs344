@@ -1,0 +1,48 @@
+Exercise 10.1
+1. Would you rather use TensorFlow or Keras to build your models?
+Depending on the purpose of use, It would be different. We can use Keras in TensorFlow, 
+but we can not use TensorFlow in Keras. At the same time, in terms of usage, Keras is more user-friendly. 
+Therefore, it seems reasonable to use TesnforFlow and build a model using Keras over tf.keras.
+
+2. Tasks 1 & 2: Report your best hyper-parameter settings and their resulting performance on the testing dataset.
+
+Task 1
+dnn_regressor = train_nn_regression_model(
+    learning_rate=0.0004,
+    steps=5000,
+    batch_size=100,
+    hidden_units=[10, 10],
+    training_examples=training_examples,
+    training_targets=training_targets,
+    validation_examples=validation_examples,
+    validation_targets=validation_targets)
+Model training finished.
+Final RMSE (on training data):   105.24
+Final RMSE (on validation data): 105.26
+
+The result from the provided solution: 
+Model training finished.
+Final RMSE (on training data):   114.11
+Final RMSE (on validation data): 115.28
+
+Task 2
+california_housing_test_data = pd.read_csv("https://download.mlcc.google.com/mledu-datasets/california_housing_test.csv", sep=",")
+
+# YOUR CODE HERE
+test_examples = preprocess_features(california_housing_test_data)
+test_targets = preprocess_targets(california_housing_test_data)
+
+predict_testing_input_fn = lambda: my_input_fn(test_examples, test_targets["median_house_value"], num_epochs=1, shuffle=False)
+
+test_predictions = dnn_regressor.predict(input_fn=predict_testing_input_fn)
+test_predictions = np.array([item['predictions'][0] for item in test_predictions])
+
+root_mean_squared_error = math.sqrt(
+    metrics.mean_squared_error(test_predictions, test_targets))
+
+print("Final RMSE (on test data): %0.2f" % root_mean_squared_error)
+
+Final RMSE (on test data): 104.42
+
+The result from the provided solution:
+Final RMSE (on test data): 110.80

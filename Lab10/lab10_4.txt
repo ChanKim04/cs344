@@ -1,0 +1,76 @@
+Exercise 10.4
+1. Task 1: Is a linear model ever preferable to a deep NN model?
+	DNN can learn more complex functions than linear models. However, the linear model has 
+    the advantage of simply starting and observing learning when making the first model.
+
+2. Task 2: Does the NN model do better than the linear model?
+	The NN model has improved performance compared to the linear model. In training and testing, 
+    the loss of the linear model is approximately 11.32 and 11.36, and the accuracy is approximately 
+    0.79 and 0.78, while the loss of the NN model is approximately 8.21 and 8.73, respectively, 
+    and the accuracy is 0.84 and 0.92.
+
+
+3. Task 3: Do embeddings do much good for sentiment analysis tasks?
+    It does not seem to be good for sentiment analysis tasks. Because the results show that the loss of 
+    training and testing is about 11.61 and the accuracy is about 0.78. This is lower than the results 
+    of the NN model and the linear model.
+
+
+4. Tasks 4–5: Name two words that have similar embeddings and explain why that makes sense.
+	The two words I found are “terrible” and “horrible”. This makes sense because two words are 
+    synonymous so that two words can be used in a similar context. Other words like “disappointing”, 
+    “disappointment”, “poor” have similar meanings in sentences as well.
+
+5. Task 6: Report your best hyper-parameters and their resulting performance.
+
+    terms_feature_column = tf.feature_column.categorical_column_with_vocabulary_list(key="terms", vocabulary_list=informative_terms)
+
+    terms_embedding_column = tf.feature_column.embedding_column(terms_feature_column, dimension=2)
+    feature_columns = [ terms_embedding_column ]
+
+    my_optimizer = tf.train.AdagradOptimizer(learning_rate=0.5)
+    my_optimizer = tf.contrib.estimator.clip_gradients_by_norm(my_optimizer, 8.0)
+
+    classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns, hidden_units=[10,10], optimizer=my_optimizer)
+    classifier.train(input_fn=lambda: _input_fn([train_path]), steps=1000)
+
+    evaluation_metrics = classifier.evaluate(input_fn=lambda: _input_fn([train_path]), steps=1000)
+    print("Training set metrics:")
+    for m in evaluation_metrics:
+    print(m, evaluation_metrics[m])
+    print("---")
+
+    evaluation_metrics = classifier.evaluate(input_fn=lambda: _input_fn([test_path]), steps=1000)
+
+    print("Test set metrics:")
+    for m in evaluation_metrics:
+    print(m, evaluation_metrics[m])
+    print("---")
+
+
+    Training set metrics:
+    loss 6.17258
+    accuracy_baseline 0.5
+    global_step 1000
+    recall 0.87248
+    auc 0.9648741
+    prediction/mean 0.4590332
+    precision 0.9362981
+    label/mean 0.5
+    average_loss 0.24690318
+    auc_precision_recall 0.96350217
+    accuracy 0.90656
+    ---
+    Test set metrics:
+    loss 8.172393
+    accuracy_baseline 0.5
+    global_step 1000
+    recall 0.81896
+    auc 0.94219345
+    prediction/mean 0.44997153
+    precision 0.90185887
+    label/mean 0.5
+    average_loss 0.3268957
+    auc_precision_recall 0.940189
+    accuracy 0.86492
+    ---
