@@ -21,9 +21,7 @@
     % wizard(hermione). - false
     % witch(hermione). - procedure 'witch(A)' does not exist
     % wizard(harry). - true
-    % wizard(Y). - Y = ron 
-    %   Although it supposes to output "Y = harry" as well, it only returns "Y = ron" when I run it. 
-    %   I expected to get something like "Y = ron, harry.")
+    % wizard(Y). - Y = ron, Y = harry
     % witch(Y). - procedure 'witch(A)' does not exist
 
 % 2. Consider the well-known modus ponens. Does Prolog implement a version of modus ponens in propositional logic form? 
