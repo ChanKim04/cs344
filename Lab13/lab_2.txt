@@ -1,0 +1,44 @@
+Suppose, 
+A is on B: 		on(A, B)
+B is on C: 		on(B, C)
+The table supports C: 	supports(table, C)
+
+For any two entities, if the first entity supports the second, then the second is on the first.
+supports(first, second) → on(second, first)
+¬supports(first, second) ∨ on(second, first)
+
+For any two entities, if the first entity is on the second, then the first is “above” the second.
+on(first, second) → above(second, first)
+¬on(first, second) ∨ above(second, first)
+
+For any three entities, if the first entity is above the second which is above the third, then the
+first is above the third.
+above(second, first) ∧ above(third, second) → above(third, first)
+¬(above(second, first) ∧ above(third, second)) ∨ above(third, first)
+¬bove(second, first) ∨ ¬above(third, second) ∨ above(third, first)
+
+So, 
+on(A, B) → above(B, A)
+¬on(A, B) ∨ above(B, A)
+
+on(B, C) → above(C, B)
+¬on(B, C) ∨ above(C, B)
+
+supports(table, C) → on(C, table)
+¬supports(table, C) ∨ on(C, table)
+
+¬on(C, table) ∨ above(table, C)
+
+above(B, A) ∧ above(C, B) → above(C, A)
+¬(above(B, A) ∧ above(C, B)) ∨ above(C, A)
+¬above(B, A) ∨ ¬above(C, B) ∨ above(C, A)
+
+above(C, A) ∧ above(table, C) → above(table, A)
+¬(above(C, A) ∧ above(table, C)) ∨ above(table, A)
+¬above(C, A) ∨ ¬above(table, C) ∨ above(table, A)
+
+on(A, B) ∨ on(B, C) ∨ supports(table, C) ∨ ¬on(A, B) ∨ above(B, A) ∨ ¬on(B, C) ∨ above(C, B)
+∨ ¬supports(table, C) ∨ on(C, table) ∨ ¬on(C, table) ∨ above(table, C) ∨ ¬above(B, A) 
+∨ ¬above(C, B) ∨ above(C, A) ∨ ¬above(C, A) ∨ ¬above(table, C) ∨ above(table, A)
+
+∴ above(table, A)
